@@ -28,7 +28,10 @@ select = [
 ]
 
 [[tool.mypy.overrides]]
-module = "pdfkit"
+module = [
+    "pdfkit",
+    "jinja2",
+]
 ignore_missing_imports = true
 
 [build-system]

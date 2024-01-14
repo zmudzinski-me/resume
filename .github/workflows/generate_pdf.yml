@@ -1,0 +1,54 @@
+name: 'Generate PDF from repository readme'
+
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+permissions:
+    contents: write
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.11'
+            - name: Install dev dependencies
+              run: poetry install --only dev
+              shell: bash
+            - name: Check linting
+              run: |
+                black --check --diff resume/
+                ruff resume/
+                mypy resume/
+    
+    build:
+        runs-on: ubuntu-latest
+        needs:
+            - lint
+        if: github.ref == 'refs/heads/main'
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.11'
+            - name: Create pdf file
+              run: |
+                python main.py
+            - name: Commit generated file
+              run: |
+                git config --local user.email "action@github.com"
+                git config --local user.name "github-actions"
+                git add --all
+                git commit -m "Generate resume pdf from GitHub Action"
+              shell: bash
+            - name: Push generated file
+              uses: ad-m/github-push-action@master
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}

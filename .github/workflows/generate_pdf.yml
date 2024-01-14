@@ -64,7 +64,7 @@ jobs:
               run: |
                 git config --local user.email "action@github.com"
                 git config --local user.name "github-actions"
-                git add --all
+                git add resume.pdf --force
                 git commit -m "Generate resume pdf from GitHub Action"
               shell: bash
             - name: Push generated file

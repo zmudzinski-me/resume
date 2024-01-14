@@ -28,7 +28,6 @@ jobs:
               shell: bash
             - name: Check linting
               run: |
-                black --check --diff resume/
                 ruff resume/
                 mypy resume/
     

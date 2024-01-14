@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div style="float: right;">
+        <ul style="padding-top: 0.5em; list-style-type: none; text-align: right;">
+            {% for contact in personal_info.contact %}
+            <li>{{ contact }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+        <div style="flex-grow: 1;">
+            <h1>{{ personal_info.name }}</h1>
+            <h4 style="margin-top: -1.5em; text-transform: uppercase; color: grey">{{ personal_info.title }}</h4>
+        </div>
+    </div>
+
+    <hr />
+
+    <h2 style="background-color: lightgray; padding: 0.5em;">Experience</h2>
+    {% for company in Experience %}
+    <ul style="list-style-type: none;">
+        <li style="margin-left: -1em;">
+            <h3>{{ company.company_name }}</h3>
+            <ul style="list-style-type: none; margin-bottom: 2em;">
+                {% for job in company.jobs %}
+                <li style=" margin-bottom: 1em;">
+                    <div style="display: block;">
+                        <div style="display: inline-block;">
+                            <span style=" font-weight: bold;">{{ job.name }}</span>
+                            <ul>
+                                {% for responsibility in job.responsibilities %}
+                                <li>{{ responsibility }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div style="float: right;">
+                            <span style="color: gray;">{{ job.start_date }} - {{ job.end_date }}</span>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endfor %}
+
+    <h2 style="background-color: lightgray; padding: 0.5em; page-break-before: always;">Education</h2>
+    {% for university in Education %}
+    <ul style="list-style-type: none;">
+        <li style="margin-left: -1em;">
+            <h3>{{ university.university_name }}</h3>
+            <ul style="margin-bottom: 2em;">
+                {% for degree in university.degrees %}
+                <li>
+                    <div style="display: block;">
+                        <div style="display: inline-block;">{{ degree.name }}</div>
+                        <div style="float: right;">
+                            <span style="color: gray;">{{ degree.start_date }} - {{ degree.end_date }}</span>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endfor %}
+
+    <h2 style="background-color: lightgray; padding: 0.5em;">Certification</h2>
+    <ul style="margin-bottom: 2em;">
+        {% for certificate in Certification %}
+        <li>
+            <div style="display: block;">
+                <div style="display: inline-block;">{{ certificate.name }}</div>
+                <div style="float: right;">
+                    <span style="color: gray;">{{ certificate.date }}</span>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2 style="background-color: lightgray; padding: 0.5em;">Projects</h2>
+    {% for project_type in Projects %}
+    <ul style="list-style-type: none;">
+        <li style="margin-left: -1em;">
+            <h3>{{ project_type.name }}</h3>
+            <ul style="margin-bottom: 2em;">
+                {% for project in project_type.projects %}
+                <li>
+                    <div style="display: block;">
+                        <div style="display: inline-block;">{{ project.name }}</div>
+                        <div style="float: right;">
+                            <span style="color: gray;">{{ project.start_date }} - {{ project.end_date }}</span>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+    {% endfor %}
+</body>
+
+</html>

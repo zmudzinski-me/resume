@@ -17,6 +17,12 @@ jobs:
               uses: actions/setup-python@v4
               with:
                 python-version: '3.11'
+            - name: Setup Poetry
+              run: |
+                echo "PYTHONPATH=$PYTHONPATH:./resume" >> $GITHUB_ENV
+                pip install poetry
+                poetry config virtualenvs.in-project true
+              shell: bash
             - name: Install dev dependencies
               run: poetry install --only dev
               shell: bash
@@ -38,6 +44,15 @@ jobs:
               uses: actions/setup-python@v4
               with:
                 python-version: '3.11'
+            - name: Setup Poetry
+              run: |
+                echo "PYTHONPATH=$PYTHONPATH:./resume" >> $GITHUB_ENV
+                pip install poetry
+                poetry config virtualenvs.in-project true
+              shell: bash
+            - name: Install dev dependencies
+              run: poetry install
+              shell: bash
             - name: Create pdf file
               run: |
                 python main.py

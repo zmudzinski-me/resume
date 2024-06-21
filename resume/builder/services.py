@@ -32,7 +32,8 @@ class BuilderService:
         self._person = {
             "name": person_name,
             "title": person_title,
-            "contact": person_contact or ["lukasz@zmudzinski.me", "github.com/lukzmu"],
+            "contact": person_contact
+            or ["lukasz@zmudzinski.me", "github.com/zmudzinski-me"],
         }
 
     def build(self) -> None:
